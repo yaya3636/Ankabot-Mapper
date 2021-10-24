@@ -7,8 +7,6 @@ JSON = dofile(global:getCurrentDirectory() .. "\\YAYA\\Module\\JSON.lua")
 
 local currentDirectory = global:getCurrentScriptDirectory()
 
-
-
 function move()
     developer:registerMessage("MapComplementaryInformationsDataMessage", CB_MapComplementaryInformation)
 end
