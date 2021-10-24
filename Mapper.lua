@@ -22,8 +22,6 @@ function CB_MapComplementaryInformation(packet)
 
         local currentMapId = map:currentMapId()
 
-        local currentPos = map:getX(currentMapId) .. "," .. map:getY(currentMapId)
-
         if mapsDecode[currentAreaId] == nil then
             newEntry = true
             Utils:Print("New Area entry !")
@@ -38,7 +36,7 @@ function CB_MapComplementaryInformation(packet)
             mapsDecode[currentAreaId][tostring(packet.subAreaId)].subAreaId = packet.subAreaId
         end
 
-        if mapsDecode[currentAreaId][tostring(packet.subAreaId)][currentMapId] == nil then
+        if mapsDecode[currentAreaId][tostring(packet.subAreaId)][currentMapId .. ""] == nil then
             newEntry = true
             Utils:Print("New Map entry !")
             mapsDecode[currentAreaId][tostring(packet.subAreaId)][currentMapId .. ""] = {}
