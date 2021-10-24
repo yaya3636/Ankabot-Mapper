@@ -38,14 +38,14 @@ function CB_MapComplementaryInformation(packet)
             mapsDecode[currentAreaId][tostring(packet.subAreaId)].subAreaId = packet.subAreaId
         end
 
-        if mapsDecode[currentAreaId][tostring(packet.subAreaId)][currentPos] == nil then
+        if mapsDecode[currentAreaId][tostring(packet.subAreaId)][currentMapId] == nil then
             newEntry = true
             Utils:Print("New Map entry !")
-            mapsDecode[currentAreaId][tostring(packet.subAreaId)][currentPos] = {}
-            mapsDecode[currentAreaId][tostring(packet.subAreaId)][currentPos].mapId = currentMapId
-            mapsDecode[currentAreaId][tostring(packet.subAreaId)][currentPos].posX = map:getX(currentMapId)
-            mapsDecode[currentAreaId][tostring(packet.subAreaId)][currentPos].posY = map:getY(currentMapId)
-            mapsDecode[currentAreaId][tostring(packet.subAreaId)][currentPos].gatherElements = {}
+            mapsDecode[currentAreaId][tostring(packet.subAreaId)][currentMapId .. ""] = {}
+            mapsDecode[currentAreaId][tostring(packet.subAreaId)][currentMapId .. ""].mapId = currentMapId
+            mapsDecode[currentAreaId][tostring(packet.subAreaId)][currentMapId .. ""].posX = map:getX(currentMapId)
+            mapsDecode[currentAreaId][tostring(packet.subAreaId)][currentMapId .. ""].posY = map:getY(currentMapId)
+            mapsDecode[currentAreaId][tostring(packet.subAreaId)][currentMapId .. ""].gatherElements = {}
 
             local elementIdOnMap = {}
 
@@ -66,12 +66,12 @@ function CB_MapComplementaryInformation(packet)
                 end
 
                 if onMap then
-                    if #mapsDecode[currentAreaId][tostring(packet.subAreaId)][currentPos].gatherElements == 0 then
+                    if #mapsDecode[currentAreaId][tostring(packet.subAreaId)][currentMapId .. ""].gatherElements == 0 then
                         local gatherElement = { gatherId = vIntegereractive.elementTypeId, count = 1 }
-                        table.insert(mapsDecode[currentAreaId][tostring(packet.subAreaId)][currentPos].gatherElements, gatherElement)
+                        table.insert(mapsDecode[currentAreaId][tostring(packet.subAreaId)][currentMapId .. ""].gatherElements, gatherElement)
                     else
                         local alreadyExist = false
-                        for _, v in pairs(mapsDecode[currentAreaId][tostring(packet.subAreaId)][currentPos].gatherElements) do
+                        for _, v in pairs(mapsDecode[currentAreaId][tostring(packet.subAreaId)][currentMapId .. ""].gatherElements) do
                             if v.gatherId == vIntegereractive.elementTypeId then
                                 alreadyExist = true
                                 v.count = v.count + 1
@@ -81,7 +81,7 @@ function CB_MapComplementaryInformation(packet)
 
                         if not alreadyExist then
                             local gatherElement = { gatherId = vIntegereractive.elementTypeId, count = 1 }
-                            table.insert(mapsDecode[currentAreaId][tostring(packet.subAreaId)][currentPos].gatherElements, gatherElement)    
+                            table.insert(mapsDecode[currentAreaId][tostring(packet.subAreaId)][currentMapId .. ""].gatherElements, gatherElement)    
                         end
                     end
                 end
